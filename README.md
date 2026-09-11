@@ -10,12 +10,18 @@ CellSim Live is a real-time, two-player simulation of the human body's internal 
 
 ### Design
 
+![Main menu](login.png)
+![Main dashboard](Main.png)
+![Balance vs Chaos mode](BalanceVsChaos.png)
 
-
+A control panel on one side sets the starting cell populations; a live grid on the other shows the tissue sample evolving. In "Balance vs. Crisis" mode, a Homeostasis meter and countdown timer sit up top, and each player gets two action buttons.
 
 ### Key features
 
-
+- Set starting cell populations and watch the tissue evolve live
+- Two-player "Balance vs. Crisis" mode with a countdown timer
+- Save configurations and compete on a fastest-recovery leaderboard
+- Auto-generated specimen names and facts from a third-party API
 
 ### Technologies
 
