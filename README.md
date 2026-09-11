@@ -25,6 +25,14 @@ A control panel on one side sets the starting cell populations; a live grid on t
 
 ### Technologies
 
+I am going to use the required technologies in the following ways.
+
+- **HTML** - The login/menu page and the main simulation dashboard.
+- **CSS** - Responsive layout with visual states tied to the Homeostasis Level.
+- **React** - Component-based UI (grid, sliders, meter, leaderboard) that re-renders from WebSocket updates; routes between menu, lobby, and simulation.
+- **Service** - Endpoints for rooms, saves, leaderboard, and login/logout; calls a third-party API (TBD from the public APIs list) for specimen names/facts.
+- **DB/Login** - Stores accounts, saved configurations, and the leaderboard.
+- **WebSocket** - Broadcasts the live grid state and both players' actions in real time.
 
 
 ## 🚀 Specification Deliverable
@@ -34,12 +42,12 @@ A control panel on one side sets the starting cell populations; a live grid on t
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Git commit requirement)
-- [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
-- [ ] Description of key features
-- [ ] Description of how you will use each technology including your 3rd party API and use of WebSocket
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [x] I completed the prerequisites for this deliverable (Git commit requirement)
+- [x] Proper use of Markdown
+- [x] A concise and compelling elevator pitch
+- [x] Description of key features
+- [x] Description of how you will use each technology including your 3rd party API and use of WebSocket
+- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ## 🚀 AWS deliverable
 
