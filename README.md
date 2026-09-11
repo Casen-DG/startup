@@ -2,11 +2,11 @@ CellSim Live
 
 [My Notes](notes.md)
 
-
+CellSim Live is a real-time, two-player simulation of the human body's fight to stay in balance.
 
 ### Elevator pitch
 
-
+CellSim Live is a real-time, two-player simulation of the human body's internal balance. One player defends it as the "Balance Keeper," boosting immunity and repairing tissue. The other attacks as the "Invader," releasing pathogens and toxins. A simple rule-based engine drives every cell on the grid in real time, so no two matches play out the same way. It's Conway's Game of Life meets a live immunology experiment.
 
 ### Design
 
