@@ -30,7 +30,7 @@ I am going to use the required technologies in the following ways.
 - **HTML** - The login/menu page and the main simulation dashboard.
 - **CSS** - Responsive layout with visual states tied to the Homeostasis Level.
 - **React** - Component-based UI (grid, sliders, meter, leaderboard) that re-renders from WebSocket updates; routes between menu, lobby, and simulation.
-- **Service** - Endpoints for rooms, saves, leaderboard, and login/logout; calls a third-party API (TBD from the public APIs list) for specimen names/facts.
+- **Service** - Endpoints for rooms, saves, leaderboard, and login/logout; calls the [MyGene.info API](https://mygene.info/) to pull a real gene/protein summary fact for each cell type shown in the specimen log.
 - **DB/Login** - Stores accounts, saved configurations, and the leaderboard.
 - **WebSocket** - Broadcasts the live grid state and both players' actions in real time.
 
