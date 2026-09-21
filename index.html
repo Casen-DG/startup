@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CellSim Live</title>
+  </head>
+  <body>
+    <header>
+      <h1>CellSim Live</h1>
+      <nav>
+        <menu>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="play.html">Simulation</a></li>
+          <li><a href="log.html">Specimen Log</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+          <li><a href="settings.html">Settings</a></li>
+        </menu>
+      </nav>
+
+      <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
+      <hr />
+    </header>
+
+    <main>
+      <h2>Welcome to CellSim Live</h2>
+      <p>
+        CellSim Live is a browser-based cellular simulation game. Grow a
+        colony of specimens, balance chaos against stability, and compete on
+        the global leaderboard as your simulation ticks forward in real time.
+      </p>
+
+      <img src="Login.png" alt="CellSim Live simulation preview" width="400" />
+
+      <!-- Authentication placeholder -->
+      <h3>Login</h3>
+      <form method="get" action="play.html">
+        <div>
+          <span>@</span>
+          <input type="text" placeholder="your@email.com" />
+        </div>
+        <div>
+          <span>&#128274;</span>
+          <input type="password" placeholder="password" />
+        </div>
+        <button type="submit">Login</button>
+        <button type="submit">Create</button>
+      </form>
+      <!-- Once authentication is implemented, the logged in user's name will be displayed here -->
+      <p><em>Logged in as: <span id="username">Guest</span></em></p>
+
+      <hr />
+
+      <!-- Main menu, mirrors the game's in-app menu -->
+      <h3>Menu</h3>
+      <ul>
+        <li>
+          <a href="play.html">Continue Simulation</a> &mdash; Tissue Sample #12, tick 214
+        </li>
+        <li><a href="play.html">New Simulation</a></li>
+        <li><a href="play.html">Load Simulation</a></li>
+        <li><a href="log.html">Specimen Log</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+        <li><a href="settings.html">Settings</a></li>
+      </ul>
+
+      <hr />
+
+      <!-- Third party service placeholder -->
+      <h3>Quote of the day</h3>
+      <p id="quote">
+        "Simplicity is the ultimate sophistication." &mdash; placeholder text,
+        will be replaced with a live call to a third party quote API.
+      </p>
+
+      <hr />
+
+      <!-- WebSocket placeholder: realtime activity from other players -->
+      <h3>Live activity</h3>
+      <textarea rows="4" cols="50" readonly>
+128 specimens simulating right now.
+[placeholder] player123 started a new simulation.
+[placeholder] player456 reached tick 500.
+      </textarea>
+    </main>
+
+    <footer>
+      <hr />
+      <span class="text-reset">Dingxi Gu</span>
+      <br />
+      <a href="https://github.com/Casen-DG/startup">GitHub</a>
+    </footer>
+  </body>
+</html>
