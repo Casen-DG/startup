@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CellSim Live - Simulation</title>
+  </head>
+  <body>
+    <header>
+      <h1>CellSim Live</h1>
+      <nav>
+        <menu>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="play.html">Simulation</a></li>
+          <li><a href="log.html">Specimen Log</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+          <li><a href="settings.html">Settings</a></li>
+        </menu>
+      </nav>
+
+      <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
+      <hr />
+    </header>
+
+    <main>
+      <h2>Tissue Sample #12 &mdash; Patient Specimen</h2>
+      <p>96 cells &middot; tick 214</p>
+
+      <!-- Application data placeholder: the simulation grid -->
+      <img src="Main.png" alt="Simulation grid showing healthy, immune, and repair cells" width="500" />
+
+      <h3>Regulatory Controls</h3>
+      <form>
+        <label>
+          Healthy Cells
+          <input type="range" min="0" max="100" value="62" />
+        </label>
+        <br />
+        <label>
+          Immune Cells
+          <input type="range" min="0" max="100" value="28" />
+        </label>
+        <br />
+        <label>
+          Repair Cells
+          <input type="range" min="0" max="100" value="18" />
+        </label>
+        <br />
+        <button type="button">Start Simulation</button>
+        <button type="button">Save Configuration</button>
+      </form>
+
+      <hr />
+
+      <h3>Legend</h3>
+      <ul>
+        <li>&#9679; Healthy Cell</li>
+        <li>&#9650; Immune Cell</li>
+        <li>&#9670; Repair Cell</li>
+      </ul>
+
+      <hr />
+
+      <!-- WebSocket placeholder -->
+      <h3>Live activity</h3>
+      <textarea rows="4" cols="50" readonly>
+[placeholder] Homeostasis level: 78%.
+[placeholder] A repair cell was spawned at tick 214.
+      </textarea>
+    </main>
+
+    <footer>
+      <hr />
+      <span class="text-reset">Dingxi Gu</span>
+      <br />
+      <a href="https://github.com/Casen-DG/startup">GitHub</a>
+    </footer>
+  </body>
+</html>
