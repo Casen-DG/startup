@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CellSim Live - Settings</title>
+  </head>
+  <body>
+    <header>
+      <h1>CellSim Live</h1>
+      <nav>
+        <menu>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="play.html">Simulation</a></li>
+          <li><a href="log.html">Specimen Log</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+          <li><a href="settings.html">Settings</a></li>
+        </menu>
+      </nav>
+
+      <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
+      <hr />
+    </header>
+
+    <main>
+      <h2>Settings</h2>
+      <p>Adjust audio, display, and simulation preferences.</p>
+
+      <form>
+        <h3>Audio</h3>
+        <label>
+          Master Volume
+          <input type="range" min="0" max="100" value="80" />
+        </label>
+        <br />
+        <label>
+          Music
+          <input type="checkbox" checked />
+        </label>
+        <br />
+        <label>
+          Sound Effects
+          <input type="checkbox" checked />
+        </label>
+
+        <hr />
+
+        <h3>Display</h3>
+        <label>
+          Graphics Quality
+          <select>
+            <option>Low</option>
+            <option selected>Medium</option>
+            <option>High</option>
+          </select>
+        </label>
+        <br />
+        <label>
+          Theme
+          <select>
+            <option selected>Dark</option>
+            <option>Light</option>
+          </select>
+        </label>
+        <br />
+        <label>
+          Fullscreen
+          <input type="checkbox" />
+        </label>
+
+        <hr />
+
+        <h3>Simulation</h3>
+        <label>
+          Simulation Speed
+          <select>
+            <option>0.5x</option>
+            <option selected>1x</option>
+            <option>2x</option>
+            <option>4x</option>
+          </select>
+        </label>
+        <br />
+        <label>
+          Auto-save every tick
+          <input type="checkbox" checked />
+        </label>
+
+        <hr />
+
+        <button type="submit">Save Settings</button>
+        <button type="reset">Reset to Defaults</button>
+      </form>
+    </main>
+
+    <footer>
+      <hr />
+      <span class="text-reset">Dingxi Gu</span>
+      <br />
+      <a href="https://github.com/Casen-DG/startup">GitHub</a>
+    </footer>
+  </body>
+</html>
