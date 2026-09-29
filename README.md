@@ -10,7 +10,7 @@ CellSim Live is a real-time, two-player simulation of the human body's internal 
 
 ### Design
 
-![Main menu](images/login.png)
+![Main menu](images/Login.png)
 ![Main dashboard](images/Main.png)
 ![Balance vs Chaos mode](images/BalanceVsChaos.png)
 
