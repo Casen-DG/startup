@@ -25,51 +25,50 @@
     </header>
 
     <main>
-      <h2>Tissue Sample #12 &mdash; Patient Specimen</h2>
-      <p>96 cells &middot; tick 214</p>
+  <!-- 顶部：平衡度条和倒计时 -->
+  <section class="status-bar">
+    <div class="meter">
+      <div class="meter-label">
+        <span>Homeostasis Level</span>
+        <span class="text-danger">41%</span>
+      </div>
+      <div class="meter-track"><div class="meter-fill" style="width:41%"></div></div>
+    </div>
+    <div class="timer">
+      <small>RESTABILIZE IN</small>
+      <span id="countdown">00:32</span>
+    </div>
+  </section>
 
-      <!-- Application data placeholder: the simulation grid -->
-      <img src="images/Main.png" alt="Simulation grid showing healthy, immune, and repair cells" width="500" />
+  <!-- 主体：两个玩家面板夹着网格 -->
+  <section class="game-layout">
+    <div class="player-card keeper">
+      <h3>Player 1</h3>
+      <p class="role">Balance Keeper</p>
+      <button class="btn btn-keeper w-100 mb-2">Boost Immunity</button>
+      <button class="btn btn-outline-keeper w-100">Repair Tissue</button>
+    </div>
 
-      <h3>Regulatory Controls</h3>
-      <form>
-        <label>
-          Healthy Cells
-          <input type="range" min="0" max="100" value="62" />
-        </label>
-        <br />
-        <label>
-          Immune Cells
-          <input type="range" min="0" max="100" value="28" />
-        </label>
-        <br />
-        <label>
-          Repair Cells
-          <input type="range" min="0" max="100" value="18" />
-        </label>
-        <br />
-        <button type="button">Start Simulation</button>
-        <button type="button">Save Configuration</button>
-      </form>
+    <div class="cell-grid">
+      <div class="cell"><span class="healthy"></span></div>
+      <div class="cell"></div>
+      <div class="cell infected"><span class="pathogen"></span></div>
+      <div class="cell"><span class="immune"></span></div>
+      <div class="cell"><span class="toxin"></span></div>
+      <div class="cell"><span class="healthy"></span></div>
+      <!-- 复制上面几种 cell，凑到 48 个（8 列 × 6 行） -->
+    </div>
 
-      <hr />
+    <div class="player-card invader">
+      <h3>Player 2</h3>
+      <p class="role">Invader</p>
+      <button class="btn btn-invader w-100 mb-2">Release Pathogen</button>
+      <button class="btn btn-outline-invader w-100">Spread Toxin</button>
+    </div>
+  </section>
 
-      <h3>Legend</h3>
-      <ul>
-        <li>&#9679; Healthy Cell</li>
-        <li>&#9650; Immune Cell</li>
-        <li>&#9670; Repair Cell</li>
-      </ul>
-
-      <hr />
-
-      <!-- WebSocket placeholder -->
-      <h3>Live activity</h3>
-      <textarea rows="4" cols="50" readonly>
-[placeholder] Homeostasis level: 78%.
-[placeholder] A repair cell was spawned at tick 214.
-      </textarea>
-    </main>
+  <p class="hint">Restore homeostasis before the timer runs out!</p>
+</main>
 
     <footer>
       <span>Dingxi Gu</span>
