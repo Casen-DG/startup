@@ -25,97 +25,99 @@
     </header>
 
     <main>
-  <!-- 顶部：平衡度条和倒计时 -->
-  <section class="status-bar">
-    <div class="meter">
-      <div class="meter-label">
-        <span>Homeostasis Level</span>
-        <span class="text-danger">41%</span>
-      </div>
-      <div class="meter-track"><div class="meter-fill" style="width:41%"></div></div>
-    </div>
-    <div class="timer">
-      <small>RESTABILIZE IN</small>
-      <span id="countdown">00:32</span>
-    </div>
-  </section>
+      <!-- 顶部：平衡度条和倒计时 -->
+      <section class="status-bar">
+        <div class="meter">
+          <div class="meter-label">
+            <span>Homeostasis Level</span>
+            <span class="text-danger">41%</span>
+          </div>
+          <div class="meter-track">
+            <div class="meter-fill" style="width:41%"></div>
+          </div>
+        </div>
+        <div class="timer">
+          <small>RESTABILIZE IN</small>
+          <span id="countdown">00:32</span>
+        </div>
+      </section>
 
-  <!-- 主体：两个玩家面板夹着网格 -->
-  <section class="game-layout">
-    <div class="player-card keeper">
-      <h3>Player 1</h3>
-      <p class="role">Balance Keeper</p>
-      <button class="btn btn-keeper w-100 mb-2">Boost Immunity</button>
-      <button class="btn btn-outline-keeper w-100">Repair Tissue</button>
-    </div>
+      <!-- 主体：两个玩家面板夹着网格 -->
+      <section class="game-layout">
+        <div class="player-card keeper">
+          <h3>Player 1</h3>
+          <p class="role">Balance Keeper</p>
+          <button class="btn btn-keeper w-100 mb-2">Boost Immunity</button>
+          <button class="btn btn-outline-keeper w-100">Repair Tissue</button>
+        </div>
 
-    <div class="cell-grid">
-  <!-- 第 1 行 -->
-  <div class="cell"><span class="healthy"></span></div>
-  <div class="cell"></div>
-  <div class="cell"><span class="healthy"></span></div>
-  <div class="cell"><span class="immune"></span></div>
-  <div class="cell"><span class="toxin"></span></div>
-  <div class="cell infected"><span class="pathogen"></span></div>
-  <div class="cell"><span class="healthy"></span></div>
-  <div class="cell infected"><span class="pathogen"></span></div>
-  <!-- 第 2 行 -->
-  <div class="cell"></div>
-  <div class="cell"><span class="healthy"></span></div>
-  <div class="cell"><span class="toxin"></span></div>
-  <div class="cell infected"><span class="pathogen"></span></div>
-  <div class="cell"><span class="healthy"></span></div>
-  <div class="cell"><span class="immune"></span></div>
-  <div class="cell infected"><span class="pathogen"></span></div>
-  <div class="cell"><span class="immune"></span></div>
-  <!-- 第 3 行 -->
-  <div class="cell infected"><span class="pathogen"></span></div>
-  <div class="cell"><span class="immune"></span></div>
-  <div class="cell"></div>
-  <div class="cell"><span class="immune"></span></div>
-  <div class="cell infected"><span class="pathogen"></span></div>
-  <div class="cell"><span class="healthy"></span></div>
-  <div class="cell"><span class="toxin"></span></div>
-  <div class="cell"><span class="healthy"></span></div>
-  <!-- 第 4 行 -->
-  <div class="cell"><span class="healthy"></span></div>
-  <div class="cell"><span class="healthy"></span></div>
-  <div class="cell"><span class="toxin"></span></div>
-  <div class="cell"><span class="healthy"></span></div>
-  <div class="cell"><span class="immune"></span></div>
-  <div class="cell infected"><span class="pathogen"></span></div>
-  <div class="cell infected"><span class="pathogen"></span></div>
-  <div class="cell"></div>
-  <!-- 第 5 行 -->
-  <div class="cell"><span class="healthy"></span></div>
-  <div class="cell infected"><span class="pathogen"></span></div>
-  <div class="cell"><span class="healthy"></span></div>
-  <div class="cell"><span class="healthy"></span></div>
-  <div class="cell"><span class="immune"></span></div>
-  <div class="cell infected"><span class="pathogen"></span></div>
-  <div class="cell"><span class="immune"></span></div>
-  <div class="cell"><span class="toxin"></span></div>
-  <!-- 第 6 行 -->
-  <div class="cell"></div>
-  <div class="cell infected"><span class="pathogen"></span></div>
-  <div class="cell"><span class="immune"></span></div>
-  <div class="cell"><span class="healthy"></span></div>
-  <div class="cell infected"><span class="pathogen"></span></div>
-  <div class="cell"><span class="healthy"></span></div>
-  <div class="cell"><span class="toxin"></span></div>
-  <div class="cell infected"><span class="pathogen"></span></div>
-</div>
+        <div class="cell-grid">
+          <!-- 第 1 行 -->
+          <div class="cell"><span class="healthy"></span></div>
+          <div class="cell"></div>
+          <div class="cell"><span class="healthy"></span></div>
+          <div class="cell"><span class="immune"></span></div>
+          <div class="cell"><span class="toxin"></span></div>
+          <div class="cell infected"><span class="pathogen"></span></div>
+          <div class="cell"><span class="healthy"></span></div>
+          <div class="cell infected"><span class="pathogen"></span></div>
+          <!-- 第 2 行 -->
+          <div class="cell"></div>
+          <div class="cell"><span class="healthy"></span></div>
+          <div class="cell"><span class="toxin"></span></div>
+          <div class="cell infected"><span class="pathogen"></span></div>
+          <div class="cell"><span class="healthy"></span></div>
+          <div class="cell"><span class="immune"></span></div>
+          <div class="cell infected"><span class="pathogen"></span></div>
+          <div class="cell"><span class="immune"></span></div>
+          <!-- 第 3 行 -->
+          <div class="cell infected"><span class="pathogen"></span></div>
+          <div class="cell"><span class="immune"></span></div>
+          <div class="cell"></div>
+          <div class="cell"><span class="immune"></span></div>
+          <div class="cell infected"><span class="pathogen"></span></div>
+          <div class="cell"><span class="healthy"></span></div>
+          <div class="cell"><span class="toxin"></span></div>
+          <div class="cell"><span class="healthy"></span></div>
+          <!-- 第 4 行 -->
+          <div class="cell"><span class="healthy"></span></div>
+          <div class="cell"><span class="healthy"></span></div>
+          <div class="cell"><span class="toxin"></span></div>
+          <div class="cell"><span class="healthy"></span></div>
+          <div class="cell"><span class="immune"></span></div>
+          <div class="cell infected"><span class="pathogen"></span></div>
+          <div class="cell infected"><span class="pathogen"></span></div>
+          <div class="cell"></div>
+          <!-- 第 5 行 -->
+          <div class="cell"><span class="healthy"></span></div>
+          <div class="cell infected"><span class="pathogen"></span></div>
+          <div class="cell"><span class="healthy"></span></div>
+          <div class="cell"><span class="healthy"></span></div>
+          <div class="cell"><span class="immune"></span></div>
+          <div class="cell infected"><span class="pathogen"></span></div>
+          <div class="cell"><span class="immune"></span></div>
+          <div class="cell"><span class="toxin"></span></div>
+          <!-- 第 6 行 -->
+          <div class="cell"></div>
+          <div class="cell infected"><span class="pathogen"></span></div>
+          <div class="cell"><span class="immune"></span></div>
+          <div class="cell"><span class="healthy"></span></div>
+          <div class="cell infected"><span class="pathogen"></span></div>
+          <div class="cell"><span class="healthy"></span></div>
+          <div class="cell"><span class="toxin"></span></div>
+          <div class="cell infected"><span class="pathogen"></span></div>
+        </div>
 
-    <div class="player-card invader">
-      <h3>Player 2</h3>
-      <p class="role">Invader</p>
-      <button class="btn btn-invader w-100 mb-2">Release Pathogen</button>
-      <button class="btn btn-outline-invader w-100">Spread Toxin</button>
-    </div>
-  </section>
+        <div class="player-card invader">
+          <h3>Player 2</h3>
+          <p class="role">Invader</p>
+          <button class="btn btn-invader w-100 mb-2">Release Pathogen</button>
+          <button class="btn btn-outline-invader w-100">Spread Toxin</button>
+        </div>
+      </section>
 
-  <p class="hint">Restore homeostasis before the timer runs out!</p>
-</main>
+      <p class="hint">Restore homeostasis before the timer runs out!</p>
+    </main>
 
     <footer>
       <span>Dingxi Gu</span>

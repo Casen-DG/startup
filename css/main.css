@@ -411,3 +411,75 @@ a:hover {
 
   .meter { width: 100%; }
 }
+
+/* ===== 表单页（login / settings） ===== */
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+}
+
+.form-label { color: var(--muted); font-size: 0.85rem; }
+
+.form-control,
+.form-select {
+  background: var(--bg);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.form-control:focus,
+.form-select:focus {
+  background: var(--bg);
+  color: var(--text);
+  border-color: var(--green);
+  box-shadow: 0 0 0 0.2rem rgba(74, 222, 128, 0.2);
+}
+
+.form-control::placeholder { color: #475569; }
+
+.form-range::-webkit-slider-thumb { background: var(--green); }
+
+/* ===== 宽面板（leaderboard / log） ===== */
+.wide-panel {
+  width: 100%;
+  max-width: 900px;
+}
+
+.table { --bs-table-bg: transparent; }
+
+.rank-1 td {
+  color: var(--green);
+  font-weight: 600;
+}
+
+/* ===== Specimen Log 卡片 ===== */
+.log-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.log-card {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.9rem;
+}
+
+.log-card:hover { border-color: var(--green); }
+
+.log-card h3 {
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.log-card p { margin: 0; }
+
+.log-card .healthy,
+.log-card .pathogen,
+.log-card .immune {
+  width: 20px;
+  flex-shrink: 0;
+}

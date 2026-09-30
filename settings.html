@@ -25,74 +25,22 @@
     </header>
 
     <main>
-      <h2>Settings</h2>
-      <p>Adjust audio, display, and simulation preferences.</p>
-
-      <form>
-        <h3>Audio</h3>
-        <label>
-          Master Volume
-          <input type="range" min="0" max="100" value="80" />
-        </label>
-        <br />
-        <label>
-          Music
-          <input type="checkbox" checked />
-        </label>
-        <br />
-        <label>
-          Sound Effects
-          <input type="checkbox" checked />
-        </label>
-
-        <hr />
-
-        <h3>Display</h3>
-        <label>
-          Graphics Quality
-          <select>
-            <option>Low</option>
-            <option selected>Medium</option>
-            <option>High</option>
+      <section class="panel auth-card">
+        <h2>Simulation Settings</h2>
+        <form>
+          <label for="healthy" class="form-label">Healthy cells</label>
+          <input id="healthy" type="range" class="form-range mb-3" value="60" />
+          <label for="immune" class="form-label">Immune cells</label>
+          <input id="immune" type="range" class="form-range mb-3" value="30" />
+          <label for="speed" class="form-label">Tick speed</label>
+          <select id="speed" class="form-select mb-4">
+            <option>Slow</option>
+            <option selected>Normal</option>
+            <option>Fast</option>
           </select>
-        </label>
-        <br />
-        <label>
-          Theme
-          <select>
-            <option selected>Dark</option>
-            <option>Light</option>
-          </select>
-        </label>
-        <br />
-        <label>
-          Fullscreen
-          <input type="checkbox" />
-        </label>
-
-        <hr />
-
-        <h3>Simulation</h3>
-        <label>
-          Simulation Speed
-          <select>
-            <option>0.5x</option>
-            <option selected>1x</option>
-            <option>2x</option>
-            <option>4x</option>
-          </select>
-        </label>
-        <br />
-        <label>
-          Auto-save every tick
-          <input type="checkbox" checked />
-        </label>
-
-        <hr />
-
-        <button type="submit">Save Settings</button>
-        <button type="reset">Reset to Defaults</button>
-      </form>
+          <button type="submit" class="btn btn-keeper w-100">Save Configuration</button>
+        </form>
+      </section>
     </main>
 
     <footer>
