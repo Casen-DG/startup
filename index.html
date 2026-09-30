@@ -25,53 +25,56 @@
     </header>
 
     <main>
-      <h2>Welcome to CellSim Live</h2>
-      <p>
-        CellSim Live is a browser-based cellular simulation game. Grow a
-        colony of specimens, balance chaos against stability, and compete on
-        the global leaderboard as your simulation ticks forward in real time.
-      </p>
+  <div class="home-layout">
+    <!-- 左：用户和菜单 -->
+    <section class="panel">
+      <p class="user-line">Logged in as: <span id="player-name">Guest</span></p>
+      <a href="login.html" class="btn btn-success w-100 mb-3">Log In</a>
 
-      <img src="images/Login.png" alt="CellSim Live main menu" width="400" />
+      <nav class="menu">
+        <a href="play.html" class="menu-item active">
+          Continue Simulation
+          <small>Tissue Sample #12 · tick 214</small>
+        </a>
+        <a href="play.html" class="menu-item">New Simulation</a>
+        <a href="play.html" class="menu-item">Load Simulation</a>
+        <a href="log.html" class="menu-item">Specimen Log</a>
+        <a href="leaderboard.html" class="menu-item">Leaderboard</a>
+        <a href="settings.html" class="menu-item">Settings</a>
+      </nav>
+    </section>
 
-      <!-- Once authentication is implemented, the logged in user's name will be displayed here -->
-      <p><em>Logged in as: <span id="username">Guest</span></em></p>
-      <a href="login.html"><button type="button">Log In</button></a>
+    <!-- 右：雷达圆圈，占位的模拟可视化 -->
+    <section class="radar-wrap">
+      <div class="radar">
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <div class="ring r3"></div>
+        <span class="dot" style="top:40%;left:55%"></span>
+        <span class="dot" style="top:60%;left:45%"></span>
+        <span class="dot" style="top:35%;left:40%"></span>
+      </div>
+    </section>
+  </div>
 
-      <hr />
+  <!-- 下：名言和实时动态 -->
+  <div class="info-row">
+    <section class="panel">
+      <h2>Quote of the day</h2>
+      <p class="quote">"Simplicity is the ultimate sophistication."</p>
+      <p class="muted">placeholder — will come from a third-party quote API</p>
+    </section>
 
-      <!-- Main menu, mirrors the game's in-app menu -->
-      <h3>Menu</h3>
-      <ul>
-        <li>
-          <a href="play.html">Continue Simulation</a> &mdash; Tissue Sample #12, tick 214
-        </li>
-        <li><a href="play.html">New Simulation</a></li>
-        <li><a href="play.html">Load Simulation</a></li>
-        <li><a href="log.html">Specimen Log</a></li>
-        <li><a href="leaderboard.html">Leaderboard</a></li>
-        <li><a href="settings.html">Settings</a></li>
+    <section class="panel">
+      <h2>Live activity</h2>
+      <ul class="activity">
+        <li><strong>128</strong> specimens simulating right now</li>
+        <li>player123 started a new simulation</li>
+        <li>player456 reached tick 500</li>
       </ul>
-
-      <hr />
-
-      <!-- Third party service placeholder -->
-      <h3>Quote of the day</h3>
-      <p id="quote">
-        "Simplicity is the ultimate sophistication." &mdash; placeholder text,
-        will be replaced with a live call to a third party quote API.
-      </p>
-
-      <hr />
-
-      <!-- WebSocket placeholder: realtime activity from other players -->
-      <h3>Live activity</h3>
-      <textarea rows="4" cols="50" readonly>
-128 specimens simulating right now.
-[placeholder] player123 started a new simulation.
-[placeholder] player456 reached tick 500.
-      </textarea>
-    </main>
+    </section>
+  </div>
+</main>
 
     <footer>
       <span>Dingxi Gu</span>

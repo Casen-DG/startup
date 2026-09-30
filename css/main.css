@@ -84,3 +84,132 @@ a:hover {
     gap: 0.25rem;
   }
 }
+
+/* ===== 首页 ===== */
+.home-layout,
+.info-row {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.info-row {
+  grid-template-columns: 1fr 1fr;
+  margin-top: 1.5rem;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.panel h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.user-line {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.menu-item {
+  display: block;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.menu-item small {
+  display: block;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.menu-item:hover,
+.menu-item.active {
+  border-color: var(--green);
+  background: rgba(74, 222, 128, 0.08);
+  color: var(--text);
+}
+
+/* 雷达 */
+.radar-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 320px;
+}
+
+.radar {
+  position: relative;
+  width: min(320px, 80vw);
+  aspect-ratio: 1;
+}
+
+.ring {
+  position: absolute;
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  border-radius: 50%;
+  inset: 0;
+}
+
+.r2 { inset: 18%; }
+
+.r3 {
+  inset: 36%;
+  background: rgba(74, 222, 128, 0.08);
+}
+
+.dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+}
+
+.quote { font-style: italic; }
+
+.muted {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.activity {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.activity li {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.activity li:last-child { border-bottom: none; }
+
+/* 窄屏：全部改成单列 */
+@media (max-width: 768px) {
+  .home-layout,
+  .info-row {
+    grid-template-columns: 1fr;
+  }
+
+  .radar-wrap { min-height: 240px; }
+}
