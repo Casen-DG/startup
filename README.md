@@ -62,27 +62,27 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [x] **HTML pages** - I did not complete this part of the deliverable.
-- [x] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [x] **Links** - I did not complete this part of the deliverable.
-- [x] **Text** - I did not complete this part of the deliverable.
-- [x] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [x] **Images** - I did not complete this part of the deliverable.
-- [x] **Login placeholder** - I did not complete this part of the deliverable.
-- [x] **DB data placeholder** - I did not complete this part of the deliverable.
-- [x] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - Six pages: `index.html` (home menu), `login.html`, `play.html` (simulation), `leaderboard.html`, `log.html` (specimen log), and `settings.html`.
+- [x] **Proper HTML element usage** - Each page uses `header`, `nav`, `main`, and `footer`, with `section`, `article`, `form`, `label`, `table`, and `ul`/`li` for content.
+- [x] **Links** - The header nav links every page, the home menu links to Play, Log, Leaderboard, and Settings, and the footer links to my GitHub repo.
+- [x] **Text** - Each page has headings and descriptive text, such as the home live activity list, the player role cards on Play, and the specimen descriptions on Log.
+- [x] **3rd party API placeholder** - The home page has a "Quote of the day" placeholder for a quote API, and the Specimen Log page has placeholders for gene facts from the MyGene.info API.
+- [x] **Images** - Design mockups (`images/Login.png`, `images/Main.png`, `images/BalanceVsChaos.png`) are embedded in this README. The pages draw the simulation visuals (radar and cell grid) with HTML elements styled by CSS.
+- [x] **Login placeholder** - `login.html` has an email/password form with Log In and Create Account buttons, and the home page shows "Logged in as: Guest".
+- [x] **DB data placeholder** - The leaderboard table shows recovery times that will be stored in and loaded from the database.
+- [x] **WebSocket placeholder** - The home page "Live activity" panel and the two-player Play page (Balance Keeper vs. Invader) represent the real-time updates that will come over WebSocket.
 
 ## 🚀 CSS deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [x] **Visually appealing colors and layout. No overflowing elements.** - I did not complete this part of the deliverable.
-- [x] **Use of a CSS framework** - I did not complete this part of the deliverable.
-- [x] **All visual elements styled using CSS** - I did not complete this part of the deliverable.
-- [x] **Responsive to window resizing using flexbox and/or grid display** - I did not complete this part of the deliverable.
-- [x] **Use of a imported font** - I did not complete this part of the deliverable.
-- [x] **Use of different types of selectors including element, class, ID, and pseudo selectors** - I did not complete this part of the deliverable.
+- [x] **Visually appealing colors and layout. No overflowing elements.** - A consistent dark theme defined with CSS variables (`--bg`, `--panel`, `--green`, `--red`, etc.) and panel-based layouts sized so content stays inside the viewport.
+- [x] **Use of a CSS framework** - Bootstrap 5 for the navbar, buttons, forms, and the leaderboard table, with my own classes (like `.btn-keeper` and `.btn-invader`) on top.
+- [x] **All visual elements styled using CSS** - Every element is styled in `main.css`, including the radar rings, the homeostasis meter, the cell grid, the player cards, and the log cards.
+- [x] **Responsive to window resizing using flexbox and/or grid display** - CSS grid lays out the home page, the game area, the cell grid, and the log cards, and flexbox lays out the header, footer, and menus. Media queries at 900px, 768px, 600px, and 560px rearrange the layout on smaller screens.
+- [x] **Use of a imported font** - Imported the Poppins font from Google Fonts and used it for the whole site.
+- [x] **Use of different types of selectors including element, class, ID, and pseudo selectors** - Element selectors (`body`, `header`, `main`, `footer`, `a`), class selectors (`.panel`, `.cell`, `.menu-item`), ID selectors (`#brand`, `#countdown`), and pseudo selectors (`:hover`, `:focus`, `:last-child`, `::placeholder`).
 
 ## 🚀 React part 1: Routing deliverable
 
