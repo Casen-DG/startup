@@ -88,10 +88,10 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [x] I completed the prerequisites for this deliverable (Simon React deployed at https://simon.start-up-dingxi.click, GitHub link in the footer of every page, Git commits)
+- [x] **Bundled using Vite** - Installed Vite, React, React Router, and Bootstrap with npm. `npm run dev` runs the Vite dev server with hot reloading, and `deployReact.sh` runs `npm run build` to bundle the app for production.
+- [x] **Components** - Converted all six HTML pages (Home, Login, Play, Leaderboard, Log, Settings) into React components under `src/`, with the shared header and footer in `src/app.jsx`. The original CSS was moved to `src/app.css` so every page keeps its original look. The Play cell grid is rendered from an array with `map()`.
+- [x] **Router** - Used `BrowserRouter`, `Routes`, and `Route` from react-router-dom to map `/`, `/login`, `/play`, `/leaderboard`, `/log`, and `/settings` to their components, plus a catch-all 404 route. Navigation uses `NavLink`/`Link`, so pages switch without a full reload. Caddy uses `try_files {path} /index.html` so refreshing any route works.
 
 ## 🚀 React part 2: Reactivity deliverable
 
