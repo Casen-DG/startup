@@ -12,7 +12,7 @@
 }
 
 /* ===== 元素选择器 ===== */
-body {
+.body {
   font-family: 'Poppins', sans-serif;
   background: var(--bg);
   color: var(--text);
