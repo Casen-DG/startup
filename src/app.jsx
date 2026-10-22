@@ -10,6 +10,9 @@ import { Log } from './log/log';
 import { Settings } from './settings/settings';
 
 export default function App() {
+  const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
+  const [authState, setAuthState] = React.useState(userName ? 'authenticated' : 'unauthenticated');
+
   return (
     <BrowserRouter>
       <div className="body">
@@ -30,7 +33,14 @@ export default function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login
+            userName={userName}
+            authState={authState}
+            onAuthChange={(name, state) => {
+              setUserName(name);
+              setAuthState(state);
+            }}
+          />} />
           <Route path="/play" element={<Play />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/log" element={<Log />} />
