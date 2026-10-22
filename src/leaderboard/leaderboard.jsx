@@ -1,23 +1,56 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
+function ScoreRow({ rank, entry }) {
+  const isMe = entry.name === localStorage.getItem('userName');
+  return (
+    <tr className={isMe ? 'highlight' : ''}>
+      <td>{rank}</td>
+      <td>{entry.name}</td>
+      <td>{entry.score}</td>
+      <td>{entry.date}</td>
+    </tr>
+  );
+}
 
 export function Leaderboard() {
+  const [scores, setScores] = useState([]);
+
+  useEffect(() => {
+    let list = [];
+    try {
+      const parsed = JSON.parse(localStorage.getItem('cellsimScores'));
+      if (Array.isArray(parsed)) list = parsed;
+    } catch {
+      list = [];
+    }
+    setScores(
+      list
+        .slice()
+        .sort((a, b) => (Number(b.score) || 0) - (Number(a.score) || 0))
+        .slice(0, 10)
+    );
+  }, []);
+
   return (
     <main>
       <section className="panel wide-panel">
-        <h2>Fastest Recovery Leaderboard</h2>
-        <div className="table-responsive">
-          <table className="table table-dark table-hover align-middle mb-0">
-            <thead>
-              <tr><th>#</th><th>Player</th><th>Recovery Time</th><th>Date</th></tr>
-            </thead>
-            <tbody>
-              <tr className="rank-1"><td>1</td><td>cellmaster</td><td>00:14</td><td>Sep 27</td></tr>
-              <tr><td>2</td><td>immuno_fan</td><td>00:19</td><td>Sep 26</td></tr>
-              <tr><td>3</td><td>player456</td><td>00:23</td><td>Sep 25</td></tr>
-              <tr><td>4</td><td>dingxi</td><td>00:28</td><td>Sep 24</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <h2>Leaderboard</h2>
+        {scores.length === 0 ? (
+          <p>No scores yet. Go play!</p>
+        ) : (
+          <div className="table-responsive">
+            <table className="table table-dark table-hover align-middle mb-0">
+              <thead>
+                <tr><th>#</th><th>Name</th><th>Homeostasis</th><th>Date</th></tr>
+              </thead>
+              <tbody>
+                {scores.map((entry, i) => (
+                  <ScoreRow key={i} rank={i + 1} entry={entry} />
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </section>
     </main>
   );

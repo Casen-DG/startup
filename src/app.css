@@ -493,3 +493,7 @@ a:hover {
   box-shadow: 0 0 6px rgba(248, 113, 113, 0.5);
 }
 .critical { color: var(--red); font-weight: 700; }
+
+/* 排行榜当前用户高亮 */
+.highlight td { background: rgba(74, 222, 128, 0.18); font-weight: 700; }
+.highlight { color: var(--green); }
