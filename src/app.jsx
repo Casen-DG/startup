@@ -23,11 +23,23 @@ export default function App() {
             </NavLink>
             <ul className="navbar-nav ms-auto flex-row gap-3">
               <li className="nav-item"><NavLink className="nav-link" to="/" end>Home</NavLink></li>
-              <li className="nav-item"><NavLink className="nav-link" to="/play">Play</NavLink></li>
-              <li className="nav-item"><NavLink className="nav-link" to="/leaderboard">Leaderboard</NavLink></li>
-              <li className="nav-item"><NavLink className="nav-link" to="/log">Log</NavLink></li>
-              <li className="nav-item"><NavLink className="nav-link" to="/settings">Settings</NavLink></li>
+              <li className="nav-item"><NavLink className="nav-link" to="/login">Login</NavLink></li>
+              {authState === 'authenticated' && (
+                <li className="nav-item"><NavLink className="nav-link" to="/play">Play</NavLink></li>
+              )}
+              {authState === 'authenticated' && (
+                <li className="nav-item"><NavLink className="nav-link" to="/leaderboard">Leaderboard</NavLink></li>
+              )}
+              {authState === 'authenticated' && (
+                <li className="nav-item"><NavLink className="nav-link" to="/log">Log</NavLink></li>
+              )}
+              {authState === 'authenticated' && (
+                <li className="nav-item"><NavLink className="nav-link" to="/settings">Settings</NavLink></li>
+              )}
             </ul>
+            <span className="navbar-text ms-3">
+              Logged in as: {authState === 'authenticated' ? userName : 'Guest'}
+            </span>
           </nav>
         </header>
 
