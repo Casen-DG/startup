@@ -483,3 +483,13 @@ a:hover {
   width: 20px;
   flex-shrink: 0;
 }
+/* 实时网格 */
+.cell.empty { background: #0f1729; }
+.cell.healthy { background: var(--green); width: auto; border-radius: 6px; }
+.cell.pathogen {
+  background: var(--red);
+  width: auto;
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgba(248, 113, 113, 0.5);
+}
+.critical { color: var(--red); font-weight: 700; }

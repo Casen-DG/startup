@@ -1,33 +1,54 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { createGrid, nextGeneration, homeostasis } from './simulation.js';
+import { CellGrid } from './cellGrid.jsx';
+import { HomeostasisMeter } from './homeostasisMeter.jsx';
 
-// Placeholder 8x6 grid; '' = empty cell. Pathogen cells are drawn as infected.
-const grid = [
-  'healthy', '', 'healthy', 'immune', 'toxin', 'pathogen', 'healthy', 'pathogen',
-  '', 'healthy', 'toxin', 'pathogen', 'healthy', 'immune', 'pathogen', 'immune',
-  'pathogen', 'immune', '', 'immune', 'pathogen', 'healthy', 'toxin', 'healthy',
-  'healthy', 'healthy', 'toxin', 'healthy', 'immune', 'pathogen', 'pathogen', '',
-  'healthy', 'pathogen', 'healthy', 'healthy', 'immune', 'pathogen', 'immune', 'toxin',
-  '', 'pathogen', 'immune', 'healthy', 'pathogen', 'healthy', 'toxin', 'pathogen',
-];
+const DEFAULTS = { healthy: 60, pathogen: 20, duration: 60 };
+
+function loadSettings() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('cellsimSettings'));
+    return { ...DEFAULTS, ...(saved || {}) };
+  } catch (e) {
+    return DEFAULTS;
+  }
+}
 
 export function Play() {
+  const [grid, setGrid] = useState([]);
+  const [running, setRunning] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(DEFAULTS.duration);
+
+  useEffect(() => {
+    const { healthy, pathogen, duration } = loadSettings();
+    setGrid(createGrid(20, 20, healthy, pathogen));
+    setTimeLeft(duration);
+  }, []);
+
+  useEffect(() => {
+    if (!running) return undefined;
+    const gridId = setInterval(() => setGrid(g => nextGeneration(g)), 500);
+    const timerId = setInterval(() => setTimeLeft(t => t - 1), 1000);
+    return () => {
+      clearInterval(gridId);
+      clearInterval(timerId);
+    };
+  }, [running]);
+
+  useEffect(() => {
+    if (timeLeft <= 0) setRunning(false);
+  }, [timeLeft]);
+
   return (
     <main>
-      {/* Top: homeostasis meter and countdown */}
       <section className="status-bar">
-        <div className="meter">
-          <div className="meter-label">
-            <span>Homeostasis Level</span>
-            <span className="text-danger">41%</span>
-          </div>
-          <div className="meter-track">
-            <div className="meter-fill" style={{ width: '41%' }}></div>
-          </div>
-        </div>
+        <HomeostasisMeter value={homeostasis(grid)} />
         <div className="timer">
-          <small>RESTABILIZE IN</small>
-          <span id="countdown">00:32</span>
+          <span id="countdown">Time: {timeLeft}s</span>
         </div>
+        <button className="btn btn-keeper" onClick={() => setRunning(r => !r)} disabled={timeLeft <= 0}>
+          {running ? 'Pause' : 'Start'}
+        </button>
       </section>
 
       {/* Main: two player panels around the cell grid */}
@@ -39,13 +60,7 @@ export function Play() {
           <button className="btn btn-outline-keeper w-100">Repair Tissue</button>
         </div>
 
-        <div className="cell-grid">
-          {grid.map((type, i) => (
-            <div key={i} className={type === 'pathogen' ? 'cell infected' : 'cell'}>
-              {type && <span className={type}></span>}
-            </div>
-          ))}
-        </div>
+        <CellGrid grid={grid} />
 
         <div className="player-card invader">
           <h3>Player 2</h3>
