@@ -1,13 +1,53 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+const NAMES = ['Ana', 'Ben', 'Chen', 'Dara', 'Eli'];
+const EVENTS = [
+  'restored balance in 42s',
+  'started a new simulation',
+  'reached tick 500',
+  'logged a new specimen',
+  'climbed the leaderboard',
+];
+const QUOTES = [
+  'Simplicity is the ultimate sophistication.',
+  'Life finds a way.',
+  'Small changes compound into big results.',
+  'Stay curious.',
+];
+
+function ActivityItem({ text }) {
+  return <li>{text}</li>;
+}
+
 export function Home() {
+  const userName = localStorage.getItem('userName') || 'Guest';
+  const [activities, setActivities] = useState([]);
+  const [quote, setQuote] = useState('');
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      const name = NAMES[Math.floor(Math.random() * NAMES.length)];
+      const event = EVENTS[Math.floor(Math.random() * EVENTS.length)];
+      setActivities((prev) => [`${name} ${event}`, ...prev].slice(0, 5));
+    }, 3000);
+    return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    setQuote(QUOTES[Math.floor(Math.random() * QUOTES.length)]);
+  }, []);
+
   return (
     <main>
+      <a className="github-link" href="https://github.com/Casen-DG/startup" target="_blank" rel="noreferrer">
+        View on GitHub
+      </a>
+
       <div className="home-layout">
         {/* Left: user and menu */}
         <section className="panel">
-          <p className="user-line">Logged in as: <span id="player-name">Guest</span></p>
+          <p className="user-line">Welcome, <span id="player-name">{userName}</span></p>
           <Link to="/login" className="btn btn-success w-100 mb-3">Log In</Link>
 
           <nav className="menu">
@@ -40,16 +80,17 @@ export function Home() {
       <div className="info-row">
         <section className="panel">
           <h2>Quote of the day</h2>
-          <p className="quote">"Simplicity is the ultimate sophistication."</p>
-          <p className="muted">placeholder — will come from a third-party quote API</p>
+          <p className="quote">"{quote}"</p>
         </section>
 
         <section className="panel">
           <h2>Live activity</h2>
           <ul className="activity">
-            <li><strong>128</strong> specimens simulating right now</li>
-            <li>player123 started a new simulation</li>
-            <li>player456 reached tick 500</li>
+            {activities.length === 0 ? (
+              <li>Waiting for activity...</li>
+            ) : (
+              activities.map((text, i) => <ActivityItem key={i} text={text} />)
+            )}
           </ul>
         </section>
       </div>
