@@ -58,7 +58,7 @@ export function Play() {
 
   useEffect(() => {
     if (!running) return undefined;
-    const gridId = setInterval(() => setGrid(g => nextGeneration(g)), 500);
+    const gridId = setInterval(() => setGrid(g => nextGeneration(g)), 3000);
     const timerId = setInterval(() => setTimeLeft(t => t - 1), 1000);
     return () => {
       clearInterval(gridId);
