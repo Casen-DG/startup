@@ -97,9 +97,15 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [x] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [x] **All functionality implemented or mocked out** - Every page is now a working React component:
+  - **Login** (`login.jsx`, `unauthenticated.jsx`, `authenticated.jsx`) - Log in / create account stores the user name in `localStorage`; the app remembers you after a refresh and Log Out clears it. Play, Leaderboard, Log, and Settings only appear in the nav after logging in, and the header shows "Logged in as".
+  - **Settings** (`settings.jsx`) - Sliders for healthy %, pathogen %, and game duration are saved to `localStorage` (`cellsimSettings`). Save is disabled when the two percentages add up to more than 100.
+  - **Play** (`play.jsx`, `simulation.js`, `cellGrid.jsx`, `homeostasisMeter.jsx`, `playerPanel.jsx`) - A 20x20 cell grid runs a rule-based simulation with a countdown timer and a live Homeostasis %. The Balance Keeper can Boost Immunity or Repair Tissue. The Invader opponent is mocked with `setInterval` (stand-in for future WebSocket messages). When time runs out the result is shown and the score is saved to `localStorage`.
+  - **Leaderboard** (`leaderboard.jsx`) - Reads saved scores from `localStorage`, sorts them, and highlights the current user's row.
+  - **Specimen Log** (`log.jsx`) - Gene facts are mocked with hard-coded data and a simulated loading delay, in place of the future MyGene.info API call.
+  - **Home** (`home.jsx`) - "View on GitHub" link to this repository, a welcome message with the user name, a mocked live activity feed (`setInterval`), and a mocked quote of the day.
+- [x] **Hooks** - `useState` manages login state, settings, the grid, timer, running/game-over state, events, scores, and activity. `useEffect` loads data from `localStorage` on mount, runs the simulation and opponent timers with `setInterval`/`setTimeout`, and cleans them up with `clearInterval`/`clearTimeout`.
 
 ## 🚀 Service deliverable
 
