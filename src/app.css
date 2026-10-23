@@ -497,3 +497,15 @@ a:hover {
 /* 排行榜当前用户高亮 */
 .highlight td { background: rgba(74, 222, 128, 0.18); font-weight: 700; }
 .highlight { color: var(--green); }
+
+.github-link {
+  display: inline-block;
+  margin: 0.5rem 0 1rem;
+  padding: 0.6rem 1.2rem;
+  background: #24292f;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 6px;
+  text-decoration: none;
+}
+.github-link:hover { background: #0969da; color: #fff; }
