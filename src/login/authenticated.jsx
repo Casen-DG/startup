@@ -2,8 +2,14 @@ import React from 'react';
 
 export function Authenticated({ userName, onLogout }) {
   function logout() {
-    localStorage.removeItem('userName');
-    onLogout();
+    fetch('/api/auth/logout', { method: 'DELETE' })
+      .catch(() => {
+        // Even if the server can't be reached, still log out locally.
+      })
+      .finally(() => {
+        localStorage.removeItem('userName');
+        onLogout();
+      });
   }
 
   return (
