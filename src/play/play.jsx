@@ -15,13 +15,13 @@ const INVADER_ACTIONS = [
 
 const DEFAULTS = { healthy: 60, pathogen: 20, duration: 60 };
 
-function loadSettings() {
-  try {
-    const saved = JSON.parse(localStorage.getItem('cellsimSettings'));
-    return { ...DEFAULTS, ...(saved || {}) };
-  } catch (e) {
-    return DEFAULTS;
-  }
+function sanitizeSettings(data) {
+  const pick = (v, fallback) => (Number.isFinite(Number(v)) ? Number(v) : fallback);
+  return {
+    healthy: pick(data?.healthy, DEFAULTS.healthy),
+    pathogen: pick(data?.pathogen, DEFAULTS.pathogen),
+    duration: pick(data?.duration, DEFAULTS.duration),
+  };
 }
 
 export function Play() {
@@ -30,20 +30,47 @@ export function Play() {
   const [timeLeft, setTimeLeft] = useState(DEFAULTS.duration);
   const [gameOver, setGameOver] = useState(false);
   const [events, setEvents] = useState([]);
+  const [loadingSettings, setLoadingSettings] = useState(true);
+  const [settingsError, setSettingsError] = useState('');
+  const [saveStatus, setSaveStatus] = useState('');
   const savedRef = useRef(false);
+  const settingsRef = useRef(DEFAULTS);
 
   function resetGame() {
-    const { healthy, pathogen, duration } = loadSettings();
+    const { healthy, pathogen, duration } = settingsRef.current;
     setGrid(createGrid(20, 20, healthy, pathogen));
     setTimeLeft(duration);
     setGameOver(false);
     setEvents([]);
     setRunning(false);
+    setSaveStatus('');
     savedRef.current = false;
   }
 
+  // Load this user's settings from the service, falling back to the defaults on error.
   useEffect(() => {
-    resetGame();
+    let cancelled = false;
+    async function loadSettings() {
+      try {
+        const response = await fetch('/api/settings');
+        if (!response.ok) {
+          throw new Error(response.status === 401 ? 'Log in to use your saved settings.' : `Request failed (${response.status}).`);
+        }
+        settingsRef.current = sanitizeSettings(await response.json());
+      } catch (e) {
+        settingsRef.current = DEFAULTS;
+        if (!cancelled) setSettingsError(`Could not load your settings, using defaults. ${e.message || ''}`.trim());
+      } finally {
+        if (!cancelled) {
+          resetGame();
+          setLoadingSettings(false);
+        }
+      }
+    }
+    loadSettings();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   // Mock opponent (stand-in for a WebSocket player)
@@ -73,21 +100,31 @@ export function Play() {
     }
   }, [timeLeft]);
 
+  // Submit the final score to the service when the game ends.
   useEffect(() => {
     if (!gameOver || savedRef.current) return;
     savedRef.current = true;
-    let scores = [];
-    try {
-      scores = JSON.parse(localStorage.getItem('cellsimScores')) || [];
-    } catch (e) {
-      scores = [];
-    }
-    scores.push({
+    const newScore = {
       name: localStorage.getItem('userName') || 'Guest',
       score: homeostasis(grid),
       date: new Date().toLocaleDateString(),
-    });
-    localStorage.setItem('cellsimScores', JSON.stringify(scores));
+    };
+    setSaveStatus('Saving score...');
+    fetch('/api/score', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=UTF-8' },
+      body: JSON.stringify(newScore),
+    })
+      .then((response) => {
+        if (response.ok) {
+          setSaveStatus('Score saved to the leaderboard.');
+        } else if (response.status === 401) {
+          setSaveStatus('Score not saved: please log in again.');
+        } else {
+          setSaveStatus(`Score not saved (error ${response.status}).`);
+        }
+      })
+      .catch(() => setSaveStatus('Score not saved: could not reach the server.'));
   }, [gameOver]);
 
   const handleAction = (action, count) => setGrid(g => applyAction(g, action, count));
@@ -99,10 +136,13 @@ export function Play() {
         <div className="timer">
           <span id="countdown">Time: {timeLeft}s</span>
         </div>
-        <button className="btn btn-keeper" onClick={() => setRunning(r => !r)} disabled={timeLeft <= 0}>
+        <button className="btn btn-keeper" onClick={() => setRunning(r => !r)} disabled={loadingSettings || timeLeft <= 0}>
           {running ? 'Pause' : 'Start'}
         </button>
       </section>
+
+      {loadingSettings && <p className="muted">Loading your settings...</p>}
+      {settingsError && <p className="text-warning" role="alert">{settingsError}</p>}
 
       {/* Main: two player panels around the cell grid */}
       <section className="game-layout">
@@ -122,6 +162,7 @@ export function Play() {
       {gameOver && (
         <section className="game-over">
           <h2>{homeostasis(grid) >= 50 ? 'Balance restored!' : 'Crisis wins!'}</h2>
+          {saveStatus && <p role="status">{saveStatus}</p>}
           <button className="btn btn-keeper" onClick={resetGame}>Play Again</button>
         </section>
       )}
