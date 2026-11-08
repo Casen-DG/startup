@@ -1,0 +1,19 @@
+{
+  "name": "service",
+  "version": "1.0.0",
+  "description": "CellSim Live backend service",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "express": "^5.3.0",
+    "uuid": "^14.0.3"
+  }
+}
