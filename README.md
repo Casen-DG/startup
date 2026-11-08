@@ -111,7 +111,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 Startup Service deliverable — for this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [x] I completed the prerequisites for this deliverable (Simon Service deployed at https://simon.start-up-dingxi.click, GitHub link, Git commits)
 - [x] **Node.js/Express HTTP service** - `service/index.js` is an Express app (`express.json()` body parsing, `cookie-parser`, an `apiRouter` mounted at `/api`, a default error handler) that listens on port 4000 by default, or the port passed as the first command-line argument. In development, `vite.config.js` proxies `/api` to `http://localhost:4000`.
 - [x] **Static middleware for frontend** - `app.use(express.static('public'))` serves the Vite build (`dist`, deployed as `service/public`), and an SPA fallback returns `index.html` for unknown paths so React Router routes like `/leaderboard` load directly.
 - [x] **Calls to third party endpoints** - The Specimen Log page (`src/log/log.jsx`) calls MyGene.info (`https://mygene.info/v3/query?q=symbol:TP53&fields=name,symbol,summary&size=1`) from the browser and displays the gene symbol, name and the first 300 characters of the summary, with loading and error states.
@@ -135,7 +135,7 @@ Startup Service deliverable — for this deliverable I did the following. I chec
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [x] I completed the prerequisites for this deliverable (Simon Service deployed at https://simon.start-up-dingxi.click, GitHub link, Git commits)
 - [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
 - [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
 
@@ -143,7 +143,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [x] I completed the prerequisites for this deliverable (Simon Service deployed at https://simon.start-up-dingxi.click, GitHub link, Git commits)
 - [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
 - [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
 - [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
