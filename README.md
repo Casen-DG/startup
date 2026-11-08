@@ -109,16 +109,27 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ## 🚀 Service deliverable
 
-For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
+Startup Service deliverable — for this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
-- [ ] **Uses BCrypt to hash passwords** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - `service/index.js` is an Express app (`express.json()` body parsing, `cookie-parser`, an `apiRouter` mounted at `/api`, a default error handler) that listens on port 4000 by default, or the port passed as the first command-line argument. In development, `vite.config.js` proxies `/api` to `http://localhost:4000`.
+- [x] **Static middleware for frontend** - `app.use(express.static('public'))` serves the Vite build (`dist`, deployed as `service/public`), and an SPA fallback returns `index.html` for unknown paths so React Router routes like `/leaderboard` load directly.
+- [x] **Calls to third party endpoints** - The Specimen Log page (`src/log/log.jsx`) calls MyGene.info (`https://mygene.info/v3/query?q=symbol:TP53&fields=name,symbol,summary&size=1`) from the browser and displays the gene symbol, name and the first 300 characters of the summary, with loading and error states.
+- [x] **Backend service endpoints** - In `service/index.js`:
+  - `POST /api/auth/create` - register (409 if the email already exists)
+  - `PUT /api/auth/login` - log in (401 on bad email/password)
+  - `DELETE /api/auth/logout` - log out (clears the token)
+  - `GET /api/scores` - top 10 scores, highest first
+  - `POST /api/score` - submit `{name, score, date}`, returns the new top 10
+  - `GET /api/settings` / `PUT /api/settings` - per-user healthy / pathogen / duration settings (defaults 60 / 20 / 60, validated on save)
+- [x] **Frontend calls service endpoints** - All requests handle errors and show a message on the page:
+  - `src/login/unauthenticated.jsx` - Log In / Create Account call `/api/auth/login` and `/api/auth/create`
+  - `src/login/authenticated.jsx` - Log Out calls `DELETE /api/auth/logout`
+  - `src/play/play.jsx` - loads `GET /api/settings` to set up the game and `POST /api/score` when the game ends
+  - `src/leaderboard/leaderboard.jsx` - `GET /api/scores` (empty state and current-user highlight kept)
+  - `src/settings/settings.jsx` - `GET /api/settings` on load, `PUT /api/settings` on save
+- [x] **Supports registration, login, logout, and restricted endpoint** - Register and log in set an auth token (a `uuid` v4) in a `token` cookie (`httpOnly`, `secure`, `sameSite: 'strict'`). Log out deletes the token on the server and clears the cookie. The `verifyAuth` middleware protects `/api/scores`, `/api/score` and `/api/settings` and returns 401 when the token is missing or invalid (including after logout).
+- [x] **Uses BCrypt to hash passwords** - `bcrypt.hash(password, 10)` stores only the password hash when a user registers, and `bcrypt.compare` checks it at login (`bcryptjs`, `service/index.js`). Users, scores and settings are kept in memory for this deliverable (MongoDB comes in the DB deliverable).
 
 ## 🚀 DB deliverable
 

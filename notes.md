@@ -56,3 +56,33 @@ Interesting things I have learned about HTML
 ## React
 
 Interesting things I have learned about React
+
+## Service
+
+Interesting things I have learned about building the service
+
+- The frontend and backend are separate processes in development: Vite serves
+  the React app on 5173 and proxies `/api` to Express on 4000
+  (`server.proxy` in `vite.config.js`). In production there is only one
+  process — Express serves the built `dist` files from `public` with
+  `express.static` and also answers `/api`.
+- The SPA fallback (`res.sendFile('index.html', { root: 'public' })`) has to be
+  the last middleware, otherwise deep links like `/leaderboard` return 404
+  after a page refresh. `express.static('public')` is relative to the working
+  directory the service is started from, not to `index.js`.
+- Never store plain passwords: `bcrypt.hash(password, 10)` stores a salted
+  hash, and `bcrypt.compare` checks a login attempt against it.
+- The auth token lives in an `httpOnly`, `secure`, `sameSite: 'strict'` cookie,
+  so page JavaScript can't read it and the browser sends it automatically on
+  every `fetch` to the same origin. Logging out has to remove the token on the
+  server too — just clearing the cookie would leave the old token valid.
+- An Express middleware like `verifyAuth` can protect any route by being
+  listed before the handler (`apiRouter.get('/scores', verifyAuth, ...)`), and
+  can attach the user to `req` so handlers can store per-user data.
+- Every `fetch` needs both checks: `response.ok` / the status code (a 401 or
+  409 does not throw) and a `.catch` for network failures.
+- A third-party API can be called straight from the browser only if it sends
+  CORS headers — MyGene.info returns `access-control-allow-origin: *`.
+- In-memory arrays are fine for this deliverable, but everything is lost when
+  the service restarts; that is what the database deliverable fixes.
+
