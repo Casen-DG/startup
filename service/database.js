@@ -34,6 +34,22 @@ function updateUser(user) {
   return userCollection.replaceOne({ email: user.email }, user);
 }
 
+function addScore(score) {
+  return scoreCollection.insertOne(score);
+}
+
+function getHighScores() {
+  return scoreCollection.find({}, { sort: { score: -1 }, limit: 10 }).toArray();
+}
+
+function getSettings(user) {
+  return settingsCollection.findOne({ email: user.email });
+}
+
+function saveSettings(user, settings) {
+  return settingsCollection.replaceOne({ email: user.email }, { email: user.email, ...settings }, { upsert: true });
+}
+
 module.exports = {
   userCollection,
   scoreCollection,
@@ -42,4 +58,8 @@ module.exports = {
   getUserByToken,
   addUser,
   updateUser,
+  addScore,
+  getHighScores,
+  getSettings,
+  saveSettings,
 };
