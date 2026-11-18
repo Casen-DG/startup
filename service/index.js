@@ -7,9 +7,6 @@ const app = express();
 
 const authCookieName = 'token';
 
-let scores = [];
-const settingsByUser = {};
-
 const DEFAULT_SETTINGS = { healthy: 60, pathogen: 20, duration: 60 };
 const DURATIONS = [30, 60, 90];
 
@@ -83,33 +80,34 @@ const verifyAuth = async (req, res, next) => {
 };
 
 // GetScores returns the top 10 scores, highest first
-apiRouter.get('/scores', verifyAuth, (_req, res) => {
-  res.send(scores);
+apiRouter.get('/scores', verifyAuth, async (_req, res) => {
+  res.send(await database.getHighScores());
 });
 
 // SubmitScore records a score and returns the new top 10
-apiRouter.post('/score', verifyAuth, (req, res) => {
+apiRouter.post('/score', verifyAuth, async (req, res) => {
   const { name, score, date } = req.body ?? {};
   const value = Number(score);
   if (!Number.isFinite(value)) {
     res.status(400).send({ msg: 'Score must be a number' });
     return;
   }
-  scores = updateScores({
+  await database.addScore({
     name: typeof name === 'string' && name ? name : req.user.email,
     score: value,
     date: typeof date === 'string' && date ? date : new Date().toLocaleDateString(),
   });
-  res.send(scores);
+  res.send(await database.getHighScores());
 });
 
 // GetSettings returns this user's simulation settings (or the defaults)
-apiRouter.get('/settings', verifyAuth, (req, res) => {
-  res.send(settingsByUser[req.user.email] ?? DEFAULT_SETTINGS);
+apiRouter.get('/settings', verifyAuth, async (req, res) => {
+  const settings = await database.getSettings(req.user);
+  res.send(settings ? { healthy: settings.healthy, pathogen: settings.pathogen, duration: settings.duration } : DEFAULT_SETTINGS);
 });
 
 // UpdateSettings saves this user's simulation settings
-apiRouter.put('/settings', verifyAuth, (req, res) => {
+apiRouter.put('/settings', verifyAuth, async (req, res) => {
   const { healthy, pathogen, duration } = req.body ?? {};
   const h = Number(healthy);
   const p = Number(pathogen);
@@ -119,8 +117,9 @@ apiRouter.put('/settings', verifyAuth, (req, res) => {
     res.status(400).send({ msg: 'Invalid settings: healthy + pathogen must be 0-100 and duration 30, 60 or 90' });
     return;
   }
-  settingsByUser[req.user.email] = { healthy: h, pathogen: p, duration: d };
-  res.send(settingsByUser[req.user.email]);
+  const settings = { healthy: h, pathogen: p, duration: d };
+  await database.saveSettings(req.user, settings);
+  res.send(settings);
 });
 
 // Default error handler
@@ -132,28 +131,6 @@ app.use(function (err, req, res, next) {
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
-
-// updateScores inserts a new score in descending order and keeps only the top 10.
-function updateScores(newScore) {
-  let found = false;
-  for (const [i, prevScore] of scores.entries()) {
-    if (newScore.score > prevScore.score) {
-      scores.splice(i, 0, newScore);
-      found = true;
-      break;
-    }
-  }
-
-  if (!found) {
-    scores.push(newScore);
-  }
-
-  if (scores.length > 10) {
-    scores.length = 10;
-  }
-
-  return scores;
-}
 
 async function createUser(email, password) {
   const passwordHash = await bcrypt.hash(password, 10);
