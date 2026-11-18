@@ -2,13 +2,11 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const express = require('express');
 const uuid = require('uuid');
-require('./database');
+const database = require('./database');
 const app = express();
 
 const authCookieName = 'token';
 
-// Users, scores and settings are saved in memory and disappear whenever the service is restarted.
-let users = [];
 let scores = [];
 const settingsByUser = {};
 
@@ -163,7 +161,7 @@ async function createUser(email, password) {
     password: passwordHash,
     token: uuid.v4(),
   };
-  users.push(user);
+  await database.addUser(user);
 
   return user;
 }
@@ -171,7 +169,13 @@ async function createUser(email, password) {
 async function findUser(field, value) {
   if (!value) return null;
 
-  return users.find((u) => u[field] === value);
+  if (field === 'email') {
+    return database.getUser(value);
+  }
+  if (field === 'token') {
+    return database.getUserByToken(value);
+  }
+  return null;
 }
 
 // setAuthCookie in the HTTP response
