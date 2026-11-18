@@ -18,8 +18,28 @@ const settingsCollection = database.collection('settings');
   }
 })();
 
+function getUser(email) {
+  return userCollection.findOne({ email });
+}
+
+function getUserByToken(token) {
+  return userCollection.findOne({ token });
+}
+
+function addUser(user) {
+  return userCollection.insertOne(user);
+}
+
+function updateUser(user) {
+  return userCollection.replaceOne({ email: user.email }, user);
+}
+
 module.exports = {
   userCollection,
   scoreCollection,
   settingsCollection,
+  getUser,
+  getUserByToken,
+  addUser,
+  updateUser,
 };
