@@ -4,7 +4,8 @@
   "description": "CellSim Live backend service",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "smoke": "node smoke-test.js"
   },
   "keywords": [],
   "author": "",
