@@ -85,4 +85,11 @@ Interesting things I have learned about building the service
   CORS headers — MyGene.info returns `access-control-allow-origin: *`.
 - In-memory arrays are fine for this deliverable, but everything is lost when
   the service restarts; that is what the database deliverable fixes.
-
+- MongoDB Atlas connections from this project require allowing `0.0.0.0/0` in
+  network access so the deployed service can connect.
+- `service/dbConfig.json` contains database credentials and must stay ignored
+  and out of Git commits.
+- `replaceOne` replaces the whole user document, so deleting `token` before
+  saving really removes it; `$set` would leave an old token in the document.
+- Xfinity CyberSecure can block `.click` domains even when the site and DNS
+  configuration are working.

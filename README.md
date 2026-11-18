@@ -129,15 +129,15 @@ Startup Service deliverable — for this deliverable I did the following. I chec
   - `src/leaderboard/leaderboard.jsx` - `GET /api/scores` (empty state and current-user highlight kept)
   - `src/settings/settings.jsx` - `GET /api/settings` on load, `PUT /api/settings` on save
 - [x] **Supports registration, login, logout, and restricted endpoint** - Register and log in set an auth token (a `uuid` v4) in a `token` cookie (`httpOnly`, `secure`, `sameSite: 'strict'`). Log out deletes the token on the server and clears the cookie. The `verifyAuth` middleware protects `/api/scores`, `/api/score` and `/api/settings` and returns 401 when the token is missing or invalid (including after logout).
-- [x] **Uses BCrypt to hash passwords** - `bcrypt.hash(password, 10)` stores only the password hash when a user registers, and `bcrypt.compare` checks it at login (`bcryptjs`, `service/index.js`). Users, scores and settings are kept in memory for this deliverable (MongoDB comes in the DB deliverable).
+- [x] **Uses BCrypt to hash passwords** - `bcrypt.hash(password, 10)` stores only the password hash when a user registers, and `bcrypt.compare` checks it at login (`bcryptjs`, `service/index.js`). Users, scores, and settings are persisted in MongoDB as documented in the DB deliverable below.
 
 ## 🚀 DB deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] I completed the prerequisites for this deliverable (Simon Service deployed at https://simon.start-up-dingxi.click, GitHub link, Git commits)
-- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
+- [x] **Stores data in MongoDB** - `service/database.js` uses the MongoDB driver and the `cellsim` database. `POST /api/score` inserts `{ name, score, date }` documents into the `score` collection, while `GET /api/scores` reads the highest 10 scores. `PUT /api/settings` upserts each user's `{ healthy, pathogen, duration }` document in the `settings` collection, and `GET /api/settings` reads it back, so scores and per-user settings survive service restarts.
+- [x] **Stores credentials in MongoDB** - Registration hashes passwords with `bcryptjs` before `addUser` stores users in the `user` collection. Login verifies the hash with `bcrypt.compare`, creates a UUID token, and stores it in MongoDB with `updateUser` as well as in an `httpOnly`, `secure`, `sameSite: 'strict'` cookie. Logout removes the token from MongoDB with `replaceOne` and clears the cookie; `verifyAuth` validates protected requests by looking up the cookie token in the database.
 
 ## 🚀 WebSocket deliverable
 
